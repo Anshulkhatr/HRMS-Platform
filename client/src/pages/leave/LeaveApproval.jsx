@@ -10,10 +10,6 @@ const LeaveApproval = () => {
   const [success, setSuccess] = useState(null);
   const [filter, setFilter] = useState('Pending');
 
-  useEffect(() => {
-    fetchLeaves();
-  }, [filter]);
-
   const fetchLeaves = async () => {
     try {
       setLoading(true);
@@ -28,6 +24,10 @@ const LeaveApproval = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchLeaves();
+  }, [filter]);
 
   const handleAction = async (id, action) => {
     setActionLoading(id);

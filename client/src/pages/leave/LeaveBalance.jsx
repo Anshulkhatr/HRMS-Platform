@@ -16,10 +16,6 @@ const LeaveBalance = () => {
     Unpaid: 999 // Representing unlimited, we'll display differently
   };
 
-  useEffect(() => {
-    fetchBalances();
-  }, []);
-
   const fetchBalances = async () => {
     try {
       setLoading(true);
@@ -31,6 +27,10 @@ const LeaveBalance = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchBalances();
+  }, []);
 
   // Calculate used leave days by type
   const calculateUsedLeaves = () => {

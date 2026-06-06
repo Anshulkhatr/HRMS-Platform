@@ -9,10 +9,6 @@ const PendingApprovals = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  useEffect(() => {
-    fetchPendingLeaves();
-  }, []);
-
   const fetchPendingLeaves = async () => {
     try {
       setLoading(true);
@@ -26,6 +22,10 @@ const PendingApprovals = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchPendingLeaves();
+  }, []);
 
   const handleAction = async (id, action) => {
     setActionLoading(id);

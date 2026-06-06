@@ -8,10 +8,6 @@ const LeaveHistory = () => {
   const [filter, setFilter] = useState('All');
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchLeaves();
-  }, []);
-
   const fetchLeaves = async () => {
     try {
       setLoading(true);
@@ -23,6 +19,10 @@ const LeaveHistory = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchLeaves();
+  }, []);
 
   const filteredLeaves = filter === 'All' 
     ? leaves 
