@@ -57,6 +57,19 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date() });
 });
 
+// Serve static assets in production
+const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../client/dist')));
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.resolve(__dirname, '../../client', 'dist', 'index.html'));
+    } else {
+      res.status(404).json({ message: 'API Route Not found' });
+    }
+  });
+}
+
 // Send back 404 error for any unknown API request
 app.use((req, res, next) => {
   next(new ApiError(404, 'API Route Not found'));
