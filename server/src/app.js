@@ -61,7 +61,7 @@ app.get('/health', (req, res) => {
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../client/dist')));
-  app.get('*', (req, res) => {
+  app.get('*all', (req, res) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.resolve(__dirname, '../../client', 'dist', 'index.html'));
     } else {
