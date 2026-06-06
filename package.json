@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "HRMS Platform with integrated server and client",
   "scripts": {
-    "install-client": "npm install --prefix client",
-    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client --legacy-peer-deps",
+    "install-server": "npm install --prefix server --legacy-peer-deps",
     "install-all": "npm run install-server && npm run install-client",
     "build-client": "npm run build --prefix client",
     "build": "npm run install-all && npm run build-client",
