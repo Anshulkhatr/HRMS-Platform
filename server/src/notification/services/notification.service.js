@@ -48,7 +48,19 @@ initializeTransporter();
 
 class NotificationService {
   async create(userId, tenantId, title, message, type = 'info') {
-    return Notification.create({ userId, tenantId, title, message, type });
+    const notification = await Notification.create({ userId, tenantId, title, message, type });
+    try {
+      const userRepository = require('../../users/repositories/user.repository');
+      const user = await userRepository.findById(userId);
+      if (user && user.email) {
+        this.sendEmail(user.email, title, message).catch((err) => {
+          logger.error(`Failed to send email notification to ${user.email}:`, err);
+        });
+      }
+    } catch (error) {
+      logger.error('Error fetching user for email notification:', error);
+    }
+    return notification;
   }
 
   async getForUser(userId) {

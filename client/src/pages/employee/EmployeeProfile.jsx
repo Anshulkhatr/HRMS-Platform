@@ -81,6 +81,7 @@ const EmployeeProfile = () => {
               <option value="on-leave">On Leave</option>
             </select>
           ) : emp.status} />
+
       </div>
 
       {editing && (

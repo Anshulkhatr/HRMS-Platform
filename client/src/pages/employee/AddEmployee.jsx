@@ -20,7 +20,7 @@ const AddEmployee = () => {
     department: 'Engineering', 
     position: 'Software Engineer', 
     joiningDate: '', 
-    salary: '' 
+    salary: ''
   });
   
   const [createAccountMode, setCreateAccountMode] = useState(true); // default to creating a new account
@@ -38,7 +38,7 @@ const AddEmployee = () => {
         
         // Filter users who do not have an employee profile yet
         const unassociated = (usersData || []).filter(
-          u => !employeesList.some(emp => emp.userId && String(emp.userId._id || emp.userId) === String(u._id))
+          u => !employeesList.some(emp => emp.userId && String(emp.userId._id || emp.userId) === String(u.id || u._id))
         );
         
         setUsers(unassociated);
@@ -199,7 +199,7 @@ const AddEmployee = () => {
                     {loadingUsers ? 'Loading Users...' : users.length === 0 ? '— No Unlinked Users Found —' : '— Select User —'}
                   </option>
                   {users.map((u) => (
-                    <option key={u._id} value={u._id} style={{ background: 'var(--bg-secondary)' }}>
+                    <option key={u.id || u._id} value={u.id || u._id} style={{ background: 'var(--bg-secondary)' }}>
                       {u.email} ({u.role === 'TenantAdmin' ? 'HR - Manager' : u.role})
                     </option>
                   ))}

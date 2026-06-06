@@ -228,3 +228,111 @@ button, input, select, textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
+
+/* Topbar Avatar Dropdown */
+.avatar-dropdown {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  width: 220px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.avatar-dropdown-header {
+  padding: 6px 8px 10px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-dropdown-name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar-dropdown-email {
+  color: var(--text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.avatar-dropdown-role {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 10px;
+  color: var(--primary);
+  background: rgba(99, 102, 241, 0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  margin-top: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.avatar-dropdown-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 6px 0;
+}
+
+.avatar-dropdown-item {
+  color: var(--text-primary);
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+
+.avatar-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.avatar-dropdown-item-logout {
+  color: var(--error);
+  font-weight: 500;
+}
+
+.avatar-dropdown-item-logout:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+}
+

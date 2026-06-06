@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Bell, Search } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { Bell, Search, User, LogOut } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getNotifications } from '../../api/notificationApi';
+import { logout } from '../../redux/auth/authSlice';
 
 const Topbar = ({ basePath }) => {
   const { user } = useSelector((state) => state.auth);
   const [unreadCount, setUnreadCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -27,10 +31,27 @@ const Topbar = ({ basePath }) => {
     return () => clearInterval(interval);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleSearchKeyDown = (e) => {
     if (e.key === 'Enter') {
       navigate(`${basePath}/employees?search=${encodeURIComponent(searchQuery.trim())}`);
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
   };
 
   return (
@@ -58,8 +79,31 @@ const Topbar = ({ basePath }) => {
           {unreadCount > 0 && <span style={styles.badge}>{unreadCount}</span>}
         </Link>
 
-        <div style={styles.avatarCircle}>
-          {user?.email?.[0]?.toUpperCase() || 'U'}
+        <div style={styles.avatarWrapper} ref={dropdownRef}>
+          <div style={styles.avatarCircle} onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {user?.email?.[0]?.toUpperCase() || 'U'}
+          </div>
+          {dropdownOpen && (
+            <div className="avatar-dropdown">
+              <div className="avatar-dropdown-header">
+                <span className="avatar-dropdown-name">
+                  {user?.employeeProfile ? `${user.employeeProfile.firstName} ${user.employeeProfile.lastName}` : (user?.name || user?.email?.split('@')[0])}
+                </span>
+                <span className="avatar-dropdown-email">{user?.email}</span>
+                <span className="avatar-dropdown-role">{user?.role}</span>
+              </div>
+              <div className="avatar-dropdown-divider" />
+              <Link to={`${basePath}/profile`} className="avatar-dropdown-item" onClick={() => setDropdownOpen(false)}>
+                <User size={16} />
+                My Profile
+              </Link>
+              <div className="avatar-dropdown-divider" />
+              <button onClick={handleLogout} className="avatar-dropdown-item avatar-dropdown-item-logout">
+                <LogOut size={16} />
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -104,6 +148,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '16px',
+  },
+  avatarWrapper: {
+    position: 'relative',
   },
   bellBtn: {
     position: 'relative',
