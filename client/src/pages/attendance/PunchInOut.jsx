@@ -103,7 +103,7 @@ const PunchInOut = () => {
           </div>
         )}
 
-        <div style={styles.btnGroup}>
+        <div style={{ ...styles.btnGroup, flexWrap: 'wrap' }}>
           <button
             className="btn btn-primary"
             onClick={handleClockIn}
@@ -131,23 +131,25 @@ const PunchInOut = () => {
         {attendance.length === 0 ? (
           <div style={styles.empty}>No records found.</div>
         ) : (
-          <table style={styles.table}>
-            <thead>
-              <tr>{['Date', 'Clock In', 'Clock Out', 'Status'].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr>
-            </thead>
-            <tbody>
-              {[...attendance].reverse().slice(0, 10).map((a, i) => (
-                <tr key={i} style={styles.tr}>
-                  <td style={styles.td}>{a.date}</td>
-                  <td style={styles.td}>{a.clockIn ? new Date(a.clockIn).toLocaleTimeString() : '—'}</td>
-                  <td style={styles.td}>{a.clockOut ? new Date(a.clockOut).toLocaleTimeString() : '—'}</td>
-                  <td style={styles.td}>
-                    <span style={{ ...styles.badge, ...statusColor(a.status) }}>{a.status}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="responsive-table-container">
+            <table style={styles.table}>
+              <thead>
+                <tr>{['Date', 'Clock In', 'Clock Out', 'Status'].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr>
+              </thead>
+              <tbody>
+                {[...attendance].reverse().slice(0, 10).map((a, i) => (
+                  <tr key={i} style={styles.tr}>
+                    <td style={styles.td}>{a.date}</td>
+                    <td style={styles.td}>{a.clockIn ? new Date(a.clockIn).toLocaleTimeString() : '—'}</td>
+                    <td style={styles.td}>{a.clockOut ? new Date(a.clockOut).toLocaleTimeString() : '—'}</td>
+                    <td style={styles.td}>
+                      <span style={{ ...styles.badge, ...statusColor(a.status) }}>{a.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

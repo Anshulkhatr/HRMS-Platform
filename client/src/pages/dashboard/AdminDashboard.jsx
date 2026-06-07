@@ -35,7 +35,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Two Column Content */}
-      <div style={styles.twoCol}>
+      <div className="grid-responsive-2">
         {/* Recent Activity */}
         <div className="glass-card" style={styles.activityCard}>
           <div style={styles.cardHeader}>

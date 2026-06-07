@@ -336,3 +336,206 @@ button, input, select, textarea {
   color: var(--error);
 }
 
+/* Responsive Grid Utilities & Helpers */
+.grid-responsive-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-responsive-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid-responsive-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.grid-profile-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+}
+
+/* Sidebar Drawer Mobile Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Responsive Table Wrapper */
+.responsive-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .grid-responsive-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-responsive-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-responsive-2 {
+    grid-template-columns: 1fr;
+  }
+  .grid-profile-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Layout Paddings on mobile */
+  .layout-content-padding {
+    padding: 16px !important;
+  }
+  
+  /* Hide search bar or make it icon only / full width */
+  .topbar-search-wrapper {
+    max-width: 160px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .grid-responsive-4, .grid-responsive-3 {
+    grid-template-columns: 1fr;
+  }
+  .topbar-search-wrapper {
+    display: none !important;
+  }
+}
+
+/* Sidebar Responsive Behavior */
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #0d1117;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 12px;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    width: 240px !important; /* Force open width on mobile drawer */
+  }
+  .sidebar-container.mobile-open {
+    transform: translateX(0);
+  }
+}
+
+.mobile-only-flex {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-only-flex {
+    display: flex !important;
+  }
+}
+
+/* ── Landing Page Responsive Grids ── */
+
+/* Hero two-column grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Stats banner row */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+/* Features 3-column grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Roles 3-column grid */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Desktop nav hidden on mobile */
+.desktop-nav {
+  display: flex;
+}
+
+/* ── Landing Page Responsive Breakpoints ── */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .roles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+

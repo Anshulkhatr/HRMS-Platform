@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bell, Search, User, LogOut } from 'lucide-react';
+import { Bell, Search, User, LogOut, Menu } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getNotifications } from '../../api/notificationApi';
 import { logout } from '../../redux/auth/authSlice';
 
-const Topbar = ({ basePath }) => {
+const Topbar = ({ basePath, toggleSidebar }) => {
   const { user } = useSelector((state) => state.auth);
   const [unreadCount, setUnreadCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,22 +56,30 @@ const Topbar = ({ basePath }) => {
 
   return (
     <header style={styles.topbar}>
-      {['SuperAdmin', 'TenantAdmin'].includes(user?.role) ? (
-        <div style={styles.searchWrapper}>
-          <Search size={16} color="#6b7280" style={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="Search employees, records..."
-            style={styles.searchInput}
-            className="form-input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleSearchKeyDown}
-          />
-        </div>
-      ) : (
-        <div />
-      )}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+        <button 
+          onClick={toggleSidebar} 
+          style={styles.menuBtn}
+          className="mobile-only-flex"
+        >
+          <Menu size={20} color="#9ca3af" />
+        </button>
+
+        {['SuperAdmin', 'TenantAdmin'].includes(user?.role) && (
+          <div style={styles.searchWrapper} className="topbar-search-wrapper">
+            <Search size={16} color="#6b7280" style={styles.searchIcon} />
+            <input
+              type="text"
+              placeholder="Search employees, records..."
+              style={styles.searchInput}
+              className="form-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
+            />
+          </div>
+        )}
+      </div>
 
       <div style={styles.actions}>
         <Link to={`${basePath}/notifications`} style={styles.bellBtn}>
@@ -184,6 +192,16 @@ const styles = {
     fontWeight: '700',
     fontSize: '14px',
     cursor: 'pointer',
+  },
+  menuBtn: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '8px',
+    borderRadius: '6px',
+    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
   },
 };
 

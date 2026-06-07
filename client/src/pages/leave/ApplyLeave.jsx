@@ -113,7 +113,7 @@ const ApplyLeave = () => {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div className="grid-responsive-2">
             <div>
               <label className="form-label">Start Date</label>
               <div style={{ position: 'relative' }}>

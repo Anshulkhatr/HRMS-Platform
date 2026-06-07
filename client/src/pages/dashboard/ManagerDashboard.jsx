@@ -47,28 +47,30 @@ const ManagerDashboard = () => {
         {pendingLeavesList.length === 0 ? (
           <div style={styles.empty}>No pending leave requests.</div>
         ) : (
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                {['Employee', 'Type', 'Start', 'End', 'Status'].map(h => (
-                  <th key={h} style={styles.th}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {pendingLeavesList.map((l, i) => (
-                <tr key={i} style={styles.tr}>
-                  <td style={styles.td}>{l.employeeId?.userId?.email || 'N/A'}</td>
-                  <td style={styles.td}>{l.type}</td>
-                  <td style={styles.td}>{new Date(l.startDate).toLocaleDateString()}</td>
-                  <td style={styles.td}>{new Date(l.endDate).toLocaleDateString()}</td>
-                  <td style={styles.td}>
-                    <span style={styles.badge}>{l.status}</span>
-                  </td>
+          <div className="responsive-table-container">
+            <table style={styles.table}>
+              <thead>
+                <tr>
+                  {['Employee', 'Type', 'Start', 'End', 'Status'].map(h => (
+                    <th key={h} style={styles.th}>{h}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {pendingLeavesList.map((l, i) => (
+                  <tr key={i} style={styles.tr}>
+                    <td style={styles.td}>{l.employeeId?.userId?.email || 'N/A'}</td>
+                    <td style={styles.td}>{l.type}</td>
+                    <td style={styles.td}>{new Date(l.startDate).toLocaleDateString()}</td>
+                    <td style={styles.td}>{new Date(l.endDate).toLocaleDateString()}</td>
+                    <td style={styles.td}>
+                      <span style={styles.badge}>{l.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

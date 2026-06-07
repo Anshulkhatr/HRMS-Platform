@@ -81,7 +81,7 @@ const EmployeeDashboard = () => {
           </div>
         )}
         {clockMsg && <div style={styles.clockMsg}>{clockMsg}</div>}
-        <div style={styles.punchButtons}>
+        <div style={{ ...styles.punchButtons, flexWrap: 'wrap' }}>
           <button
             className="btn btn-primary"
             onClick={handleClockIn}
@@ -110,23 +110,25 @@ const EmployeeDashboard = () => {
         {leaves.length === 0 ? (
           <div style={styles.empty}>No leave requests found.</div>
         ) : (
-          <table style={styles.table}>
-            <thead>
-              <tr>{['Type', 'Start', 'End', 'Status'].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr>
-            </thead>
-            <tbody>
-              {leaves.slice(0, 5).map((l, i) => (
-                <tr key={i} style={styles.tr}>
-                  <td style={styles.td}>{l.type}</td>
-                  <td style={styles.td}>{new Date(l.startDate).toLocaleDateString()}</td>
-                  <td style={styles.td}>{new Date(l.endDate).toLocaleDateString()}</td>
-                  <td style={styles.td}>
-                    <span style={{ ...styles.badge, ...statusColor(l.status) }}>{l.status}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="responsive-table-container">
+            <table style={styles.table}>
+              <thead>
+                <tr>{['Type', 'Start', 'End', 'Status'].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr>
+              </thead>
+              <tbody>
+                {leaves.slice(0, 5).map((l, i) => (
+                  <tr key={i} style={styles.tr}>
+                    <td style={styles.td}>{l.type}</td>
+                    <td style={styles.td}>{new Date(l.startDate).toLocaleDateString()}</td>
+                    <td style={styles.td}>{new Date(l.endDate).toLocaleDateString()}</td>
+                    <td style={styles.td}>
+                      <span style={{ ...styles.badge, ...statusColor(l.status) }}>{l.status}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

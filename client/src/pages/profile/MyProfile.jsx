@@ -23,7 +23,7 @@ const MyProfile = () => {
         <p style={{ color: 'var(--text-secondary)' }}>Manage and view your personal profile and employment details</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr', md: '1fr 2fr', gap: '24px' }}>
+      <div className="grid-profile-layout">
         {/* Main User Info Card */}
         <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           <div style={{ 
@@ -72,7 +72,7 @@ const MyProfile = () => {
               Account Information
             </h3>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', sm: '1fr 1fr', gap: '16px' }}>
+            <div className="grid-responsive-2">
               <div>
                 <label style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Full Name</label>
                 <div style={{ padding: '10px 0', borderBottom: '1px solid var(--border-color)', fontWeight: 500 }}>
@@ -97,7 +97,7 @@ const MyProfile = () => {
                 Employment Information
               </h3>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', sm: '1fr 1fr', gap: '16px' }}>
+              <div className="grid-responsive-2">
                 <div>
                   <label style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Department</label>
                   <div style={{ padding: '10px 0', borderBottom: '1px solid var(--border-color)', fontWeight: 500 }}>

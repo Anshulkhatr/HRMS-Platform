@@ -133,7 +133,7 @@ const AddEmployee = () => {
         {error && <div style={styles.errorAlert}>{error}</div>}
 
         <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.grid}>
+          <div className="grid-responsive-2">
             {/* User Credentials Segment */}
             {createAccountMode ? (
               <>
@@ -340,7 +340,7 @@ const styles = {
   title: { fontSize: '24px', fontWeight: '800', color: '#f3f4f6' },
   sub: { fontSize: '13px', color: '#6b7280', marginTop: '4px' },
   formCard: { padding: '32px', maxWidth: '800px' },
-  modeTabs: { display: 'flex', gap: '10px', marginBottom: '28px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' },
+  modeTabs: { display: 'flex', gap: '10px', marginBottom: '28px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', flexWrap: 'wrap' },
   tabBtn: { display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 16px', borderRadius: '6px', cursor: 'pointer', color: '#9ca3af', fontWeight: '600', transition: 'var(--transition-smooth)' },
   activeTab: { background: 'var(--primary)', color: '#fff' },
   form: { display: 'flex', flexDirection: 'column', gap: '24px' },

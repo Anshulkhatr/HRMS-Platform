@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/ui/Sidebar';
 import Topbar from '../components/ui/Topbar';
 
 const AdminLayout = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div style={styles.wrapper}>
-      <Sidebar basePath="/admin" />
+      {mobileOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setMobileOpen(false)} 
+        />
+      )}
+      <Sidebar basePath="/admin" mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <div style={styles.main}>
-        <Topbar basePath="/admin" />
-        <div style={styles.content}>
+        <Topbar basePath="/admin" toggleSidebar={() => setMobileOpen(!mobileOpen)} />
+        <div style={styles.content} className="layout-content-padding">
           <Outlet />
         </div>
       </div>

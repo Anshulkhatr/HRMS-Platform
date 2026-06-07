@@ -34,7 +34,7 @@ const getNavItems = (role, basePath) => {
   return items;
 };
 
-const Sidebar = ({ basePath }) => {
+const Sidebar = ({ basePath, mobileOpen, setMobileOpen }) => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -45,11 +45,19 @@ const Sidebar = ({ basePath }) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    if (setMobileOpen) setMobileOpen(false);
     navigate('/');
   };
 
+  const handleLinkClick = () => {
+    if (setMobileOpen) setMobileOpen(false);
+  };
+
   return (
-    <aside style={{ ...styles.sidebar, width: collapsed ? '72px' : '240px' }}>
+    <aside 
+      className={`sidebar-container ${mobileOpen ? 'mobile-open' : ''}`}
+      style={{ width: collapsed ? '72px' : '240px' }}
+    >
       {/* Logo */}
       <div style={styles.logoRow}>
         {!collapsed && (
@@ -85,6 +93,7 @@ const Sidebar = ({ basePath }) => {
             <Link
               key={item.path}
               to={item.path}
+              onClick={handleLinkClick}
               style={{
                 ...styles.navItem,
                 ...(isActive ? styles.navItemActive : {}),
