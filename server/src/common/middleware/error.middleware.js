@@ -18,9 +18,16 @@ const errorConverter = (err, req, res, next) => {
     } else if (error.code === 11000) {
       statusCode = 400;
       message = `Duplicate field value entered: ${Object.keys(error.keyValue).join(', ')}`;
-    } else if (error.message === 'Request Timeout' || error.statusCode === 408) {
+    } else if (
+      error.message === 'Request Timeout' ||
+      error.statusCode === 408 ||
+      (error.message && error.message.toLowerCase().includes('timeout'))
+    ) {
       statusCode = 408;
       message = 'The request timed out. This is usually due to a slow network connection, database latency, or external API (e.g. Cloudinary) response delay.';
+    } else if (error.message && (error.message.includes('file format') || error.message.includes('format not allowed'))) {
+      statusCode = 400;
+      message = error.message;
     }
 
     error = new ApiError(statusCode, message, false, err.stack);

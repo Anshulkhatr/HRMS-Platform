@@ -17,7 +17,7 @@ if (config.cloudinary.cloudName && config.cloudinary.apiKey) {
     cloudinary: cloudinary,
     params: {
       folder: 'hrms_documents',
-      allowed_formats: ['jpg', 'png', 'pdf', 'docx'],
+      resource_type: 'auto', // Automatically detect and allow all resource types (image, video, raw document, etc.)
     },
   });
 } else {

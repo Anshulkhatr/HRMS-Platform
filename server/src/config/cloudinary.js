@@ -7,6 +7,7 @@ if (config.cloudinary.cloudName && config.cloudinary.apiKey) {
     cloud_name: config.cloudinary.cloudName,
     api_key: config.cloudinary.apiKey,
     api_secret: config.cloudinary.apiSecret,
+    timeout: 10000, // 10 seconds timeout limit
   });
   logger.info('Cloudinary configured successfully.');
 } else {
